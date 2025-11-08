@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { 
   Brain, 
   Code, 
-  Database, 
   Zap, 
   Shield, 
   Target,
@@ -13,8 +12,6 @@ import {
   Mail,
   Phone,
   ExternalLink,
-  BookOpen,
-  Users,
   Lightbulb,
   CheckCircle
 } from 'lucide-react';

@@ -80,7 +80,7 @@ export const AnalyzePage: React.FC = () => {
       }
     },
     onSuccess: (data) => {
-      setResults(data);
+      setResults('batch_id' in data ? data : [data]);
       setShowResults(true);
       const count = 'batch_id' in data ? data.processed_images : 1;
       toast.success(`Analysis complete! Processed ${count} image${count > 1 ? 's' : ''}.`);
@@ -389,7 +389,7 @@ export const AnalyzePage: React.FC = () => {
                 </div>
               ) : (
                 // Single Result
-                <ResultCard result={results as AnalysisResult} />
+                <ResultCard result={Array.isArray(results) ? results[0] : results} />
               )}
             </motion.div>
           )}

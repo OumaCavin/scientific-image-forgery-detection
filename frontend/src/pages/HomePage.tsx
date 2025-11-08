@@ -4,13 +4,10 @@ import { motion } from 'framer-motion';
 import { 
   Brain, 
   Upload, 
-  FileImage, 
-  BarChart3, 
   Shield, 
   Zap, 
   Target,
   Award,
-  Github,
   ExternalLink,
   CheckCircle
 } from 'lucide-react';

@@ -13,13 +13,9 @@ import {
   Line,
   PieChart,
   Pie,
-  Cell,
-  RadialBarChart,
-  RadialBar
+  Cell
 } from 'recharts';
 import { 
-  TrendingUp, 
-  Clock, 
   Target, 
   Zap, 
   Cpu, 
@@ -105,7 +101,7 @@ const fileTypes = [
   { name: 'BMP', value: 9, color: '#EF4444' }
 ];
 
-const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'];
+
 
 export const StatisticsPage: React.FC = () => {
   const [statistics, setStatistics] = useState<StatisticsData | null>(null);
@@ -310,7 +306,7 @@ export const StatisticsPage: React.FC = () => {
                     outerRadius={80}
                     fill="#8884d8"
                     dataKey="count"
-                    label={({ name, value }) => `${name}: ${value}`}
+                    label={({ name, value }: { name: string; value: number }) => `${name}: ${value}`}
                   >
                     {processingTimes.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
@@ -329,7 +325,7 @@ export const StatisticsPage: React.FC = () => {
           <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
             <h3 className="text-lg font-bold text-slate-900 mb-4">File Type Distribution</h3>
             <div className="space-y-4">
-              {fileTypes.map((item, index) => (
+              {fileTypes.map((item, _index) => (
                 <div key={item.name} className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div 
@@ -416,7 +412,7 @@ export const StatisticsPage: React.FC = () => {
             <div className="text-center p-4 bg-slate-50 rounded-xl">
               <HardDrive className="w-8 h-8 text-green-600 mx-auto mb-2" />
               <div className="text-lg font-semibold text-slate-900">
-                {statistics.modelInfo.image_size}px
+                {statistics.modelInfo.imageSize}px
               </div>
               <div className="text-sm text-slate-600">Image Resolution</div>
             </div>
