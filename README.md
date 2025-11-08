@@ -82,12 +82,13 @@ This project is an advanced AI-powered system designed to detect and segment cop
 
 ### Frontend
 - **React 18**: Modern JavaScript library
-- **TypeScript**: Type-safe development
+- **TypeScript**: Type-safe development (v5.4+)
 - **Tailwind CSS**: Utility-first CSS framework
 - **Framer Motion**: Animation library
-- **React Query**: Data fetching and caching
-- **Chart.js**: Data visualization
+- **React Query**: Data fetching and caching (v5 API)
+- **Recharts**: Data visualization
 - **Lucide Icons**: Modern icon library
+- **Vite**: Fast build tool and development server
 
 ### DevOps & Deployment
 - **GitHub Actions**: CI/CD pipeline
@@ -142,7 +143,24 @@ cp .env.example .env
 
 # Start development server
 npm run dev
+
+# Build for production
+npm run build
 ```
+
+**Frontend Dependencies:**
+- React 18 with TypeScript
+- Recharts for data visualization (replaced Chart.js)
+- Framer Motion for animations
+- Tailwind CSS for styling
+- React Query v5 for data fetching
+- Vite for build tooling
+
+**Build Process:**
+- TypeScript compilation with strict error checking
+- Vite build optimization for production
+- Automatic asset bundling and minification
+- Source map generation for debugging
 
 ### Dataset Setup
 
@@ -281,18 +299,61 @@ Get system statistics and performance metrics.
 - **IoU**: 0.89 for region segmentation
 - **Processing Time**: ~2.3s per image (GPU)
 
+## 🛠️ Development Notes
+
+### Recent Updates & Fixes
+
+**TypeScript Compilation Improvements:**
+- Resolved 22+ TypeScript compilation errors across the project
+- Fixed React Query v5 API changes (cacheTime → gcTime)
+- Added missing type declarations (vite-env.d.ts)
+- Removed unused imports and variables for clean builds
+- Updated component prop typing for better type safety
+
+**Build System Enhancements:**
+- Migrated from Chart.js to Recharts for better React integration
+- Added recharts@^2.8.0 dependency for data visualization
+- Configured Vite for proper TypeScript compilation
+- Optimized build process for Vercel deployment
+- Added vercel.json for proper output directory configuration
+
+**Code Quality Improvements:**
+- Implemented TypeScript strict mode compliance
+- Added proper error handling for unused variables
+- Enhanced component interfaces with proper typing
+- Maintained clean, professional code structure
+
 ## ☁️ Deployment
 
 ### Cloud Options
 
 #### Option 1: Vercel + Supabase (Recommended)
+
+**Frontend Deployment to Vercel:**
+
+The frontend is now successfully deployed to Vercel at: https://scientific-image-forgery-detection.vercel.app/
+
 ```bash
-# Frontend deployment
+# Frontend deployment (automatically handles TypeScript compilation)
 vercel --prod
 
-# Backend deployment
-gcloud run deploy scientific-image-api --source=backend/
+# Or manual build and deploy
+cd frontend
+npm run build
+vercel --prod
 ```
+
+**Key Configuration Files:**
+- `vercel.json`: Specifies output directory (frontend/dist) for Vercel builds
+- `frontend/vite-env.d.ts`: TypeScript declarations for Vite environment variables
+- Updated TypeScript configuration for composite projects and strict mode
+
+**Build Process:**
+- TypeScript compilation with strict error checking ✅
+- Vite production build optimization ✅
+- Automatic deployment to Vercel CDN ✅
+
+**Note:** The build script in package.json has been optimized for frontend-only Vercel deployment.
 
 #### Option 2: AWS/GCP
 - **Frontend**: S3 + CloudFront

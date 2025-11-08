@@ -45,24 +45,69 @@ This guide provides comprehensive instructions for deploying the Scientific Imag
 
 #### Frontend Deployment to Vercel
 
-1. **Connect to Vercel**
-   - Push code to GitHub
-   - Connect repository to Vercel
-   - Configure environment variables in Vercel dashboard
+**Current Status:** ✅ Successfully deployed at https://scientific-image-forgery-detection.vercel.app/
 
-2. **Set environment variables in Vercel**
+1. **Connect to Vercel**
+   - Repository automatically connected via GitHub integration
+   - Vercel handles TypeScript compilation and Vite builds
+   - Environment variables configured in Vercel dashboard
+
+2. **Key Configuration Files**
+   ```json
+   // vercel.json (root directory)
+   {
+     "outputDirectory": "frontend/dist"
+   }
+   ```
+
+   ```typescript
+   // frontend/vite-env.d.ts
+   /// <reference types="vite/client" />
+   interface ImportMetaEnv {
+     readonly VITE_API_URL: string
+     readonly VITE_SUPABASE_URL: string
+     readonly VITE_SUPABASE_ANON_KEY: string
+   }
+   interface ImportMeta {
+     readonly env: ImportMetaEnv
+   }
+   ```
+
+3. **Environment Variables in Vercel**
    ```env
    VITE_API_URL=https://your-api-url.com/api/v1
    VITE_SUPABASE_URL=https://ygcnkooxairnavbrqblq.supabase.co
-   VITE_SUPABASE_ANON_KEY=your_anon_key
+   VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
    VITE_APP_NAME="Scientific Image Forgery Detection"
    VITE_APP_VERSION="1.0.0"
    ```
 
-3. **Deploy**
+4. **Build Process (Updated)**
    ```bash
+   # Automated by Vercel - builds only frontend for static deployment
+   npm run build  # Runs: npm run build:frontend (removed backend build)
+   
+   # Manual build for testing
+   cd frontend
+   npm run build  # TypeScript compilation + Vite build
+   ```
+
+5. **Deployment Commands**
+   ```bash
+   # Automatic deployment via GitHub integration
+   git push origin main  # Triggers Vercel deployment
+   
+   # Manual deployment
    vercel --prod
    ```
+
+**Recent Build Fixes:**
+- ✅ Resolved 22+ TypeScript compilation errors
+- ✅ Fixed React Query v5 API changes (cacheTime → gcTime)
+- ✅ Added recharts dependency for data visualization
+- ✅ Created TypeScript declarations for Vite environment variables
+- ✅ Optimized build script for Vercel (frontend-only)
+- ✅ Configured proper output directory for Vercel builds
 
 #### Backend Deployment to Cloud Run
 
@@ -416,6 +461,53 @@ This guide provides comprehensive instructions for deploying the Scientific Imag
    - Enable read replicas
    - Configure automatic failover
 
+## TypeScript Compilation & Build Configuration
+
+### Recent TypeScript Fixes
+
+**Issues Resolved:**
+1. **Unused Variables/Imports (TS6133)**: Removed 10+ unused imports across multiple files
+2. **API Changes (TS2353)**: Updated React Query from `cacheTime` to `gcTime` for v5 compatibility
+3. **Missing Dependencies (TS2307)**: Added `recharts@^2.8.0` for data visualization
+4. **Environment Variables (TS2339)**: Created `vite-env.d.ts` for TypeScript declarations
+5. **Property Naming (TS2551)**: Fixed `image_size` → `imageSize` consistency
+6. **Type Annotations (TS7031)**: Added explicit types for destructured parameters
+7. **Component Props (TS2345/TS2352)**: Fixed type assignments in AnalyzePage component
+
+**Files Modified:**
+- `frontend/src/App.tsx`: Fixed React Query v5 API, removed unused imports
+- `frontend/src/pages/AboutPage.tsx`: Removed unused icon imports
+- `frontend/src/pages/HomePage.tsx`: Removed unused icon imports
+- `frontend/src/pages/StatisticsPage.tsx`: Fixed chart imports, property names, and typing
+- `frontend/src/pages/AnalyzePage.tsx`: Fixed component prop types and unused parameters
+- `frontend/package.json`: Added recharts dependency
+- `frontend/src/vite-env.d.ts`: NEW - TypeScript declarations for Vite
+- `vercel.json`: NEW - Vercel output directory configuration
+- `package.json`: Updated build script for frontend-only deployment
+
+### Build Configuration
+
+**TypeScript Configuration:**
+- Strict mode enabled for better type safety
+- Composite project configuration for efficient builds
+- Source maps enabled for debugging
+
+**Vite Configuration:**
+- TypeScript compilation integrated with Vite
+- Asset bundling and optimization
+- Development server on port 3000
+
+**Build Process:**
+```bash
+# Development
+npm run dev              # Start development server
+npm run build:frontend   # TypeScript + Vite build
+
+# Production
+npm run build            # Runs only frontend build for Vercel
+cd frontend && npm run build
+```
+
 ## Troubleshooting
 
 ### Common Issues
@@ -435,6 +527,83 @@ This guide provides comprehensive instructions for deploying the Scientific Imag
    - Verify environment variables
    - Review deployment logs
 
+### TypeScript Compilation Issues
+
+**TS6133 (Unused Variables):**
+```bash
+# Fix: Remove unused variables or prefix with underscore
+# Before: index, React, Database, BookOpen, etc.
+// After: _index, removed unused imports
+```
+
+**TS2353 (Cache Time):**
+```typescript
+// Fix: Update React Query v5 API
+// Before: cacheTime: 10 * 60 * 1000
+// After:  gcTime: 10 * 60 * 1000
+```
+
+**TS2339 (ImportMeta):**
+```typescript
+// Fix: Create vite-env.d.ts with declarations
+/// <reference types="vite/client" />
+interface ImportMetaEnv {
+  readonly VITE_API_URL: string
+  readonly VITE_SUPABASE_URL: string
+  readonly VITE_SUPABASE_ANON_KEY: string
+}
+```
+
+**TS2307 (Missing Module):**
+```bash
+# Fix: Install missing dependency
+npm install recharts@^2.8.0
+```
+
+**Build Directory Issues:**
+```json
+// Fix: Add vercel.json for output directory
+{
+  "outputDirectory": "frontend/dist"
+}
+```
+
+### Vercel-Specific Issues
+
+1. **"No Output Directory found"**
+   - Solution: Add `vercel.json` with correct `outputDirectory`
+   - Check build logs for actual build location
+
+2. **TypeScript compilation failures**
+   - Solution: Review build log for specific error codes
+   - Update dependencies for compatibility
+   - Ensure all unused variables are removed
+
+3. **Environment variables not loading**
+   - Solution: Prefix with `VITE_` for Vite builds
+   - Configure in Vercel dashboard environment variables section
+
+### Performance Optimization
+
+1. **Bundle size optimization**
+   ```bash
+   # Analyze bundle size
+   npm run build:frontend
+   npm install -g webpack-bundle-analyzer
+   npx webpack-bundle-analyzer dist/assets/*.js
+   ```
+
+2. **Code splitting**
+   ```typescript
+   // Use dynamic imports for large components
+   const StatisticsPage = lazy(() => import('./pages/StatisticsPage'))
+   ```
+
+3. **Image optimization**
+   - Use WebP format for better compression
+   - Implement lazy loading for large datasets
+   - Optimize chart library usage
+
 ### Logs Analysis
 
 ```bash
@@ -446,6 +615,12 @@ docker stats
 
 # Check database connections
 docker-compose exec db psql -U postgres -c "SELECT count(*) FROM pg_stat_activity;"
+
+# Vercel build logs
+vercel logs --follow
+
+# Check TypeScript compilation
+cd frontend && npx tsc --noEmit
 ```
 
 ## Cost Optimization

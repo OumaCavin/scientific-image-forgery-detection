@@ -8,6 +8,7 @@ scientific-image-forgery-detection/
 ├── .gitignore                         # Git ignore rules
 ├── docker-compose.yml                 # Docker compose configuration
 ├── Dockerfile                         # Docker image definition
+├── vercel.json                        # Vercel deployment configuration
 ├── .github/
 │   └── workflows/
 │       └── ci-cd.yml                  # CI/CD pipeline configuration
@@ -35,19 +36,54 @@ scientific-image-forgery-detection/
 ├── frontend/                          # React TypeScript frontend
 │   ├── package.json                   # Node.js dependencies
 │   ├── tsconfig.json                  # TypeScript configuration
+│   ├── tsconfig.node.json             # Node TypeScript configuration
 │   ├── tailwind.config.js             # Tailwind CSS configuration
 │   ├── vite.config.ts                 # Vite configuration
+│   ├── vite-env.d.ts                  # TypeScript declarations for Vite
 │   ├── .env                           # Environment variables
 │   ├── .env.example                   # Environment variables template
 │   ├── index.html                     # Main HTML template
 │   └── src/
 │       ├── main.tsx                   # React entry point
 │       ├── App.tsx                    # Main App component
+│       ├── vite-env.d.ts              # Vite environment type declarations
 │       ├── components/
 │       │   └── Layout.tsx             # Layout component
 │       ├── pages/
 │       │   ├── HomePage.tsx           # Home page component
 │       │   ├── AnalyzePage.tsx        # Analysis page component
+│       │   ├── StatisticsPage.tsx     # Statistics page component
+│       │   ├── AboutPage.tsx          # About page component
+│       │   └── ResultsPage.tsx        # Results page component
+│       ├── hooks/                     # Custom React hooks
+│       ├── utils/                     # Utility functions
+│       ├── types/                     # TypeScript type definitions
+│       └── dist/                      # Built production files (Vite output)
+├── models/                            # ML models and training data
+│   ├── trained/                       # Trained model weights
+│   ├── configs/                       # Model configuration files
+│   └── checkpoints/                   # Training checkpoints
+├── data/                              # Dataset and processed data
+│   ├── raw/                           # Original dataset files
+│   ├── processed/                     # Preprocessed data
+│   └── results/                       # Analysis results
+├── docs/                              # Project documentation
+│   ├── DEPLOYMENT.md                  # Deployment guide (updated)
+│   ├── PROJECT_STRUCTURE.md           # This file
+│   └── API_DOCUMENTATION.md           # API reference
+├── tests/                             # Test suites
+│   ├── backend/                       # Backend test files
+│   ├── frontend/                      # Frontend test files
+│   └── integration/                   # Integration test files
+├── scripts/                           # Utility scripts
+│   ├── deploy.sh                      # Deployment automation
+│   ├── setup.sh                       # Project setup
+│   └── analyze_image.py               # CLI analysis tool
+└── config/                            # Configuration files
+    ├── model_config.yaml              # Model configuration
+    ├── database_config.yml            # Database configuration
+    └── api_config.json                # API configuration
+```
 │       │   ├── ResultsPage.tsx        # Results page component
 │       │   ├── StatisticsPage.tsx     # Statistics page component
 │       │   └── AboutPage.tsx          # About page component
@@ -100,6 +136,59 @@ scientific-image-forgery-detection/
 └── logs/                              # Application logs
     └── app.log                        # Application log file
 ```
+
+## Recent Updates & Changes (November 2025)
+
+### Frontend Build System Updates
+
+**New Files Added:**
+- `vercel.json` - Vercel deployment configuration specifying output directory
+- `frontend/src/vite-env.d.ts` - TypeScript declarations for Vite environment variables
+- `frontend/dist/` - Production build output directory
+
+**Updated Configuration Files:**
+- `frontend/package.json` - Added recharts dependency, updated build scripts
+- `frontend/tsconfig.json` - Enhanced TypeScript configuration for strict mode
+- `frontend/vite.config.ts` - Optimized for production builds
+- `package.json` (root) - Modified build script for Vercel deployment
+
+**Code Quality Improvements:**
+- Resolved 22+ TypeScript compilation errors
+- Removed unused imports across all React components
+- Updated React Query v5 API compatibility (cacheTime → gcTime)
+- Enhanced component prop typing
+- Fixed property naming consistency (image_size → imageSize)
+- Improved error handling and type safety
+
+### Deployment Configuration
+
+**Vercel Deployment:**
+- Frontend successfully deployed to: https://scientific-image-forgery-detection.vercel.app/
+- Build process optimized for static frontend hosting
+- TypeScript compilation integrated with Vite build
+- Environment variables properly configured for production
+
+**Build Process:**
+- TypeScript strict mode compilation ✅
+- Vite production optimization ✅
+- Asset bundling and minification ✅
+- Source map generation for debugging ✅
+
+### Technology Stack Updates
+
+**Frontend Technologies:**
+- React 18 with TypeScript
+- Recharts for data visualization (replaced Chart.js)
+- Framer Motion for animations
+- Tailwind CSS for styling
+- React Query v5 for data management
+- Vite for build tooling
+
+**Build & Deployment:**
+- Vercel for frontend hosting
+- GitHub Actions integration
+- Docker containerization
+- TypeScript strict compilation
 
 ## Key Files Description
 
