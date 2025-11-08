@@ -404,7 +404,7 @@ interface ResultCardProps {
   index?: number;
 }
 
-const ResultCard: React.FC<ResultCardProps> = ({ result, index }) => {
+const ResultCard: React.FC<ResultCardProps> = ({ result, _index }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   const statusColor = result.result === 'forged' ? 'red' : 'green';
