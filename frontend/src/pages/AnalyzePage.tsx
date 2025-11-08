@@ -383,7 +383,7 @@ export const AnalyzePage: React.FC = () => {
 
                   <div className="space-y-4">
                     {results.results.map((result, index) => (
-                      <ResultCard key={result.case_id} result={result} index={index} />
+                      <ResultCard key={result.case_id} result={result} />
                     ))}
                   </div>
                 </div>
@@ -401,10 +401,9 @@ export const AnalyzePage: React.FC = () => {
 
 interface ResultCardProps {
   result: AnalysisResult;
-  index?: number;
 }
 
-const ResultCard: React.FC<ResultCardProps> = ({ result, _index }) => {
+const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   const statusColor = result.result === 'forged' ? 'red' : 'green';
