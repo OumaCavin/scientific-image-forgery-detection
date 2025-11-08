@@ -339,9 +339,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 **Cavin Otieno**  
-- Email: cavin.otieno@example.com
+- Email: mailto:cavin.otieno012@gmail.com
+- Phone: +254708101604
 - GitHub: [@OumaCavin](https://github.com/OumaCavin)
 - LinkedIn: [Cavin Otieno](https://linkedin.com/in/cavin-otieno)
+- WhatsApp: [wa.me/+254708101604](wa.me/+254708101604)
 
 ---
 

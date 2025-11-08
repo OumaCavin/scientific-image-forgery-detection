@@ -11,6 +11,7 @@ import {
   Github,
   Linkedin,
   Mail,
+  Phone,
   ExternalLink,
   BookOpen,
   Users,
@@ -138,11 +139,27 @@ export const AboutPage: React.FC = () => {
                   <span>LinkedIn</span>
                 </a>
                 <a
-                  href="mailto:cavin.otieno@example.com"
+                  href="mailto:cavin.otieno012@gmail.com"
                   className="inline-flex items-center space-x-2 bg-green-100 text-green-700 px-4 py-2 rounded-lg font-medium hover:bg-green-200 transition-colors"
                 >
                   <Mail className="w-4 h-4" />
                   <span>Email</span>
+                </a>
+                <a
+                  href="tel:+254708101604"
+                  className="inline-flex items-center space-x-2 bg-purple-100 text-purple-700 px-4 py-2 rounded-lg font-medium hover:bg-purple-200 transition-colors"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>Call</span>
+                </a>
+                <a
+                  href="wa.me/+254708101604"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 bg-green-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-600 transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  <span>WhatsApp</span>
                 </a>
               </div>
             </div>
@@ -375,7 +392,7 @@ export const AboutPage: React.FC = () => {
               <span>View Source Code</span>
             </a>
             <a
-              href="mailto:cavin.otieno@example.com"
+              href="mailto:cavin.otieno012@gmail.com"
               className="inline-flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors"
             >
               <Mail className="w-5 h-5" />

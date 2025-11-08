@@ -233,7 +233,7 @@ networks:
             logger.info("Initializing git repository...")
             subprocess.run(["git", "init"], cwd=self.root_dir, check=True)
             subprocess.run(["git", "config", "user.name", "Cavin Otieno"], cwd=self.root_dir, check=True)
-            subprocess.run(["git", "config", "user.email", "cavin.otieno@example.com"], cwd=self.root_dir, check=True)
+            subprocess.run(["git", "config", "user.email", "cavin.otieno012@gmail.com"], cwd=self.root_dir, check=True)
             
             # Create .gitignore
             gitignore_content = """# Python
