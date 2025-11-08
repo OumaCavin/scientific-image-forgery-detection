@@ -26,7 +26,7 @@
     "start": "bash start.sh",
     "build:frontend": "cd frontend && npm run build",
     "build:backend": "cd backend && python setup.py build",
-    "build": "npm run build:frontend && npm run build:backend",
+    "build": "npm run build:frontend",
     "dev:backend": "cd backend && python main.py",
     "dev:frontend": "cd frontend && npm run dev",
     "install:backend": "cd backend && pip install -r requirements.txt",
