@@ -382,7 +382,7 @@ export const AnalyzePage: React.FC = () => {
                   </div>
 
                   <div className="space-y-4">
-                    {results.results.map((result, index) => (
+                    {results.results.map((result, _index) => (
                       <ResultCard key={result.case_id} result={result} />
                     ))}
                   </div>
